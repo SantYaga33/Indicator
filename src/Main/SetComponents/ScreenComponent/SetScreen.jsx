@@ -17,7 +17,7 @@ class SetScreen extends React.Component {
 	render = () => {
 		let currentClass = this.props.state.inputError ? styles.input_red : '' ;
 
-		const InputList = this.props.state.inputs.map (el =><CreatInput key={el.id} type={'number'} {...el}
+		const InputList = this.props.state.inputs.map (el =><CreatInput key={el.id} type={'number'} {...el} value={el.value}
 																		className={currentClass} pattern={'^[0-9]+$'}
 																		onChange={this.analyzeInputStatus}/>);
 		return (

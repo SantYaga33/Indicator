@@ -30,11 +30,47 @@ class App extends React.Component {
 
 	};
 
+	componentDidMount () {
+		this.restoreState ();
+	};
+
+	saveState = () => {
+		let stateAsString = JSON.stringify ( this.state);
+		localStorage.setItem ('count-state', stateAsString);
+	};
+
+	restoreState = () => {
+		let state = {
+			startCountValue: 0,
+			maxCountValue: 0,
+			startCountStore: 0,
+			maxCountStore: 0,
+			screenTitle: 'input value and press "Set"',
+			countColor: 'text', // 'red' 'green' 'error'
+			inputError: false,
+			buttons: [
+				{ id: 1, title: 'Inc', buttonStatus: true, activeClassBtn: 'button_green' },
+				{ id: 2, title: 'Reset', buttonStatus: true, activeClassBtn: 'button_red' },
+				{ id: 3, title: 'Set', buttonStatus: true, activeClassBtn: 'button_green' },
+			],
+			inputs: [
+				{ id: 1, activeClassInp: '', },
+				{ id: 2, activeClassInp: '', },
+			]
+		};
+		let stateAsString = localStorage.getItem ('count-state');
+		if ( stateAsString !== null ) {
+			state = JSON.parse (stateAsString);
+		}
+		this.setState  (state);
+	};
+
 	addCount = () => {
 		if ( this.state.startCountValue < this.state.maxCountValue ) {
 			this.setState ({
 				startCountValue: this.state.startCountValue + 1,
 			}, () => {
+				this.saveState ();
 				if ( this.state.startCountValue === this.state.maxCountValue ) {
 					this.setState ({
 						countColor: 'red',
@@ -50,7 +86,7 @@ class App extends React.Component {
 				} else {
 					this.setState ({
 						screenTitle: this.state.startCountValue
-					})
+					}, () => {this.saveState ();})
 				}
 			});
 		}
@@ -69,13 +105,13 @@ class App extends React.Component {
 					return button
 				}
 			})
-		});
+		}, () => {this.saveState ();});
 	};
 
 	setCountValue = () => {
 		this.setState ({
-			startCountValue: this.state.startCountValue,
-			maxCountValue: this.state.maxCountValue,
+			// startCountValue: this.state.startCountValue,
+			// maxCountValue: this.state.maxCountValue,
 			startCountStore: this.state.startCountValue,
 			maxCountStore: this.state.maxCountValue,
 			countColor: 'green',
@@ -89,7 +125,7 @@ class App extends React.Component {
 					return button
 				}
 			})
-		});
+		}, () => {this.saveState ();});
 	};
 
 	repeatCode = (currentCount) => {
@@ -106,7 +142,7 @@ class App extends React.Component {
 						return button
 					}
 				})
-			});
+			}, () => {this.saveState ();});
 		} else {
 			this.setState ({
 				screenTitle: 'input value and press "Set"',
@@ -121,7 +157,7 @@ class App extends React.Component {
 						return button
 					}
 				})
-			});
+			}, () => {this.saveState ();});
 		}
 	};
 
