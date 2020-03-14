@@ -115,6 +115,7 @@ class App extends React.Component {
 			startCountStore: this.state.startCountValue,
 			maxCountStore: this.state.maxCountValue,
 			countColor: 'green',
+			// screenTitle: this.state.startCountValue,
 			screenTitle: this.state.startCountValue,
 			buttons: this.state.buttons.map (button => {
 				if ( button.id === 1 || button.id === 2 ) {

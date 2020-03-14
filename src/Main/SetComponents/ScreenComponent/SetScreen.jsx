@@ -19,7 +19,7 @@ class SetScreen extends React.Component {
 
 		const InputList = this.props.state.inputs.map (el =><CreatInput key={el.id} type={'number'} {...el} value={el.value}
 																		className={currentClass} pattern={'^[0-9]+$'}
-																		onChange={this.analyzeInputStatus}/>);
+																		onChange={this.analyzeInputStatus} state={this.props.state}/>);
 		return (
 			<div className={styles.screen}>
 				<div className={styles.discr_wrap}>
