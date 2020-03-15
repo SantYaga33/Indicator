@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './App.module.css'
 import Main from "./Main/Components/Main";
 import SetCounter from "./Main/SetComponents/SetConter";
+import { saveState,restoreState } from './localStorage'
+
 
 
 class App extends React.Component {
@@ -29,48 +31,57 @@ class App extends React.Component {
 		]
 
 	};
-
 	componentDidMount () {
-		this.restoreState ();
-	};
-
-	saveState = () => {
-		let stateAsString = JSON.stringify ( this.state);
-		localStorage.setItem ('count-state', stateAsString);
-	};
-
-	restoreState = () => {
-		let state = {
-			startCountValue: 0,
-			maxCountValue: 0,
-			startCountStore: 0,
-			maxCountStore: 0,
-			screenTitle: 'input value and press "Set"',
-			countColor: 'text', // 'red' 'green' 'error'
-			inputError: false,
-			buttons: [
-				{ id: 1, title: 'Inc', buttonStatus: true, activeClassBtn: 'button_green' },
-				{ id: 2, title: 'Reset', buttonStatus: true, activeClassBtn: 'button_red' },
-				{ id: 3, title: 'Set', buttonStatus: true, activeClassBtn: 'button_green' },
-			],
-			inputs: [
-				{ id: 1, activeClassInp: '', },
-				{ id: 2, activeClassInp: '', },
-			]
-		};
-		let stateAsString = localStorage.getItem ('count-state');
-		if ( stateAsString !== null ) {
-			state = JSON.parse (stateAsString);
+		let newState = restoreState ();
+		if (!!newState){
+			this.setState(newState);
+		} else {
+			this.setState (this.state);
 		}
-		this.setState  (state);
 	};
+
+
+	// componentDidMount () {
+	// 	this.restoreState ();
+	// };
+
+	// saveState = () => {
+	// 	let stateAsString = JSON.stringify ( this.state);
+	// 	localStorage.setItem ('count-state', stateAsString);
+	// };
+	//
+	// restoreState = () => {
+	// 	let state = {
+	// 		startCountValue: 0,
+	// 		maxCountValue: 0,
+	// 		startCountStore: 0,
+	// 		maxCountStore: 0,
+	// 		screenTitle: 'input value and press "Set"',
+	// 		countColor: 'text', // 'red' 'green' 'error'
+	// 		inputError: false,
+	// 		buttons: [
+	// 			{ id: 1, title: 'Inc', buttonStatus: true, activeClassBtn: 'button_green' },
+	// 			{ id: 2, title: 'Reset', buttonStatus: true, activeClassBtn: 'button_red' },
+	// 			{ id: 3, title: 'Set', buttonStatus: true, activeClassBtn: 'button_green' },
+	// 		],
+	// 		inputs: [
+	// 			{ id: 1, activeClassInp: '', },
+	// 			{ id: 2, activeClassInp: '', },
+	// 		]
+	// 	};
+	// 	let stateAsString = localStorage.getItem ('count-state');
+	// 	if ( stateAsString !== null ) {
+	// 		state = JSON.parse (stateAsString);
+	// 	}
+	// 	this.setState  (state);
+	// };
 
 	addCount = () => {
 		if ( this.state.startCountValue < this.state.maxCountValue ) {
 			this.setState ({
 				startCountValue: this.state.startCountValue + 1,
 			}, () => {
-				this.saveState ();
+				saveState (this.state);
 				if ( this.state.startCountValue === this.state.maxCountValue ) {
 					this.setState ({
 						countColor: 'red',
@@ -86,7 +97,7 @@ class App extends React.Component {
 				} else {
 					this.setState ({
 						screenTitle: this.state.startCountValue
-					}, () => {this.saveState ();})
+					}, () => {saveState (this.state);})
 				}
 			});
 		}
@@ -105,7 +116,7 @@ class App extends React.Component {
 					return button
 				}
 			})
-		}, () => {this.saveState ();});
+		}, () => {saveState (this.state);});
 	};
 
 	setCountValue = () => {
@@ -126,7 +137,7 @@ class App extends React.Component {
 					return button
 				}
 			})
-		}, () => {this.saveState ();});
+		}, () => {saveState (this.state);});
 	};
 
 	repeatCode = (currentCount) => {
@@ -143,7 +154,7 @@ class App extends React.Component {
 						return button
 					}
 				})
-			}, () => {this.saveState ();});
+			}, () => {saveState (this.state);});
 		} else {
 			this.setState ({
 				screenTitle: 'input value and press "Set"',
@@ -158,7 +169,7 @@ class App extends React.Component {
 						return button
 					}
 				})
-			}, () => {this.saveState ();});
+			}, () => {saveState (this.state);});
 		}
 	};
 
