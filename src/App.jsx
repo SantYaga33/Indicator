@@ -13,8 +13,8 @@ class App extends React.Component {
 
 	state = {
 
-		startCountValue: 0,
-		maxCountValue: 0,
+		startCountValue: 'insert the number',
+		maxCountValue: 'insert the number',
 		startCountStore: 0,
 		maxCountStore: 0,
 		screenTitle: 'input value and press "Set"',
@@ -77,15 +77,15 @@ class App extends React.Component {
 	// };
 
 	addCount = () => {
-		if ( this.state.startCountValue < this.state.maxCountValue ) {
+		if ( this.state.startCountStore < this.state.maxCountStore ) {
 			this.setState ({
-				startCountValue: this.state.startCountValue + 1,
+				startCountStore: this.state.startCountStore + 1,
 			}, () => {
 				saveState (this.state);
-				if ( this.state.startCountValue === this.state.maxCountValue ) {
+				if ( this.state.startCountStore === this.state.maxCountStore ) {
 					this.setState ({
 						countColor: 'red',
-						screenTitle: this.state.startCountValue,
+						screenTitle: this.state.startCountStore,
 						buttons: this.state.buttons.map (button => {
 							if ( button.id === 1 ) {
 								return { ...button, buttonStatus: true, activeClassBtn: 'button_red' }
@@ -96,7 +96,7 @@ class App extends React.Component {
 					})
 				} else {
 					this.setState ({
-						screenTitle: this.state.startCountValue
+						screenTitle: this.state.startCountStore
 					}, () => {saveState (this.state);})
 				}
 			});
@@ -106,9 +106,9 @@ class App extends React.Component {
 	reset = () => {
 		this.setState ({
 			countColor: 'green',
-			screenTitle: this.state.startCountStore,
-			startCountValue: this.state.startCountStore,
-			maxCountValue: this.state.maxCountStore,
+			screenTitle: this.state.startCountValue,
+			startCountStore: this.state.startCountValue,
+			maxCountStore: this.state.maxCountValue,
 			buttons: this.state.buttons.map (button => {
 				if ( button.id === 1 ) {
 					return { ...button, buttonStatus: false, activeClassBtn: 'button_green' }

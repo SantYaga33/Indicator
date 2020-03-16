@@ -14,15 +14,10 @@ class SetScreen extends React.Component {
 		}
 	};
 
-	// value={el.id === '2'? this.props.state.startCountValue : el.id === '1'?
-	// 		this.props.state.maxCountValue: '0'}
-	//
 	render = () => {
 		let currentClass = this.props.state.inputError ? styles.input_red : '' ;
 
-		const InputList = this.props.state.inputs.map (el =><CreatInput key={el.id} type={'number'}
-														
-														{...el}
+		const InputList = this.props.state.inputs.map (el =><CreatInput key={el.id} type={'number'}	{...el}
 														className={currentClass} pattern={'^[0-9]+$'}
 														onChange={this.analyzeInputStatus} state={this.props.state}/>);
 		return (
