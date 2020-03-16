@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './App.module.css'
 import Main from "./Main/Components/Main";
 import SetCounter from "./Main/SetComponents/SetConter";
-import { saveState,restoreState } from './localStorage'
-
+import { saveState, restoreState } from './localStorage'
 
 
 class App extends React.Component {
@@ -31,10 +30,11 @@ class App extends React.Component {
 		]
 
 	};
+
 	componentDidMount () {
 		let newState = restoreState ();
-		if (!!newState){
-			this.setState(newState);
+		if ( !!newState ) {
+			this.setState (newState);
 		} else {
 			this.setState (this.state);
 		}
