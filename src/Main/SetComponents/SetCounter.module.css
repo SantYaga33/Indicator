@@ -10,7 +10,6 @@
     overflow: hidden;
     align-items: center;
     justify-content: center;
-
     width: 350px;
     height: 250px;
     margin: 100px 20px;
@@ -20,18 +19,6 @@
     border: 1px solid #fff;
     border-radius: 8px;
 }
-
-/*.main_container:before {*/
-/*    position: absolute;*/
-/*    top: -8px;*/
-/*    left: -500px;*/
-/*    width: 50px;*/
-/*    height: 700px;*/
-
-/*    content: '';*/
-/*    transform: skewX(-45deg);*/
-/*    background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .5));*/
-/*}*/
 
 .main_container:hover {
     color: #fff;

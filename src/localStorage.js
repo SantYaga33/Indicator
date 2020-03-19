@@ -3,11 +3,12 @@ export const saveState = (state) => {
 	localStorage.setItem ('our-state', stateAsString);
 };
 
-export const restoreState = () => {
+export const restoreState = (currentState) => {
 	let state;
-	let stateAsString = localStorage.getItem ('our-state');
+	let stateAsString = localStorage.getItem ('our-state' );
 	if ( stateAsString !== null ) {
-		 state = JSON.parse (stateAsString);
+		state = JSON.parse (stateAsString);
+		return state;
 	}
-	return state;
+	 return currentState;
 };

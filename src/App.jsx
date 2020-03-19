@@ -32,14 +32,10 @@ class App extends React.Component {
 	};
 
 	componentDidMount () {
-		let newState = restoreState ();
-		if ( !!newState ) {
-			this.setState (newState);
-		} else {
-			this.setState (this.state);
-		}
-	};
+		let state = restoreState (this.state);
+		this.setState (state);
 
+	};
 
 	addCount = () => {
 		if ( this.state.startCountStore < this.state.maxCountStore ) {
@@ -86,12 +82,9 @@ class App extends React.Component {
 
 	setCountValue = () => {
 		this.setState ({
-			// startCountValue: this.state.startCountValue,
-			// maxCountValue: this.state.maxCountValue,
 			startCountStore: this.state.startCountValue,
 			maxCountStore: this.state.maxCountValue,
 			countColor: 'green',
-			// screenTitle: this.state.startCountValue,
 			screenTitle: this.state.startCountValue,
 			buttons: this.state.buttons.map (button => {
 				if ( button.id === 1 || button.id === 2 ) {
