@@ -20,6 +20,7 @@ class App extends React.Component {
 		countColor: 'text', // 'red' 'green' 'error'
 		inputError: false,
 		buttons: [
+
 			{ id: 1, title: 'Inc', buttonStatus: true, activeClassBtn: 'button_green' },
 			{ id: 2, title: 'Reset', buttonStatus: true, activeClassBtn: 'button_red' },
 			{ id: 3, title: 'Set', buttonStatus: true, activeClassBtn: 'button_green' },
